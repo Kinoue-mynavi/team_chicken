@@ -12,4 +12,4 @@ arrival = session.query(stations.kilo).filter_by(name = arrival).first()
 
 distance = departure.kilo - arrival.kilo
 
-print(round(abs(departure.kilo - arrival.kilo),2))
+print(round(abs(distance),2))

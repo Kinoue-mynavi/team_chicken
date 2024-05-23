@@ -11,7 +11,7 @@ namelist = [
 
 oddlist = []
 
-for i in range(1,8,2):
+for i in range(1,len(namelist),2):
     oddlist.append(namelist[i])
 
 print(oddlist,end="")
