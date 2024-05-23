@@ -10,6 +10,18 @@ class stations(Base):
     seq= Column('seq', Integer, primary_key = True)
     name = Column('name', String(20))
     kilo = Column('kilo', Numeric(6,2))
+
+#テーブル：transpoatの定義
+class transport(Base):
+    __tablename__ = 'transpoat'
+    date= Column('date', Date, primary_key = True)
+    seq= Column('seq', Integer, primary_key = True)
+    departure = Column('departure', String(20))
+    arrival = Column('arrival', String(20))
+    via = Column('via', String(40))
+    amount = Column('amount', Integer)
+    
+    
     
 def main(args):
     """
