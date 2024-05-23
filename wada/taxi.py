@@ -2,7 +2,8 @@ import sys
 arg = sys.argv
 
 distance = int(arg[1])
-
+ 
+#関数の定義
 def calcfare(distance):
     if distance <= 1500:
         fare = 630
