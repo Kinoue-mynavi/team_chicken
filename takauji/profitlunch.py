@@ -19,8 +19,8 @@ curry_sales = curry*850
 sales = karaage_sales + curry_sales
 
 #原価の計算
-karaage_prime = Decimal((karaage_sales*0.323).quantize(Decimal('0'), rounding = ROUND_HALF_UP))
-curry_prime = Decimal((curry_sales*0.284).quantize(Decimal('0'), rounding = ROUND_HALF_UP))
+karaage_prime = Decimal(str(karaage_sales*0.323)).quantize(Decimal('0'), rounding = ROUND_HALF_UP)
+curry_prime = Decimal(str(curry_sales*0.284)).quantize(Decimal('0'), rounding = ROUND_HALF_UP)
 prime = karaage_prime + curry_prime
 
 #粗利の計算
