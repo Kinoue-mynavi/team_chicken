@@ -1,64 +1,19 @@
-from sqlalchemy import *
-from sqlalchemy.orm import *
-from sqlalchemy.ext.declarative import declarative_base
-import os
+from database import session
+from tables import Stations
 
-# mysqlのDBの設定
-DATABASE = "mysql+pymysql://{user}:{password}@{host}/{database}?charset=utf8".format(**{
-        "user": os.getenv("DB_USER", "root"),
-        "password": os.getenv("DB_PASSWORD", "mysql"),
-        "host": os.getenv("DB_HOST", "localhost"),
-        "database":os.getenv("DB_DATABESE", "ENSHU")
-    })
+stations = session.query(Stations).all()
 
-ENGINE = create_engine(
-    DATABASE,
-    encoding = "utf-8",
-    echo=True # True:実行のたびにSQLが出力
-)
+# 第1引数を取得
+import sys
+args = sys.argv
 
-# Sessionの作成
-session = scoped_session(
-  # ORM実行時の設定
-    sessionmaker(
-        autocommit = False,
-        autoflush = False,
-        bind = ENGINE
-    )
-)
+# 第2,3引数を取得
+name1 = args[1]
+name2 = args[2]
 
-# tables.pyで継承する
-Base = declarative_base()
-Base.query = session.query_property()
-from sqlalchemy import *
-from sqlalchemy.orm import *
-from sqlalchemy.ext.declarative import declarative_base
-import os
+# SELECT（データ抽出）
+station1 = session.query(Stations.kilo).filter_by(name = name1).first()
+station2 = session.query(Stations.kilo).filter_by(name = name2).first()
 
-# mysqlのDBの設定
-DATABASE = "mysql+pymysql://{user}:{password}@{host}/{database}?charset=utf8".format(**{
-        "user": os.getenv("DB_USER", "root"),
-        "password": os.getenv("DB_PASSWORD", "mysql"),
-        "host": os.getenv("DB_HOST", "localhost"),
-        "database":os.getenv("DB_DATABESE", "ENSHU")
-    })
-
-ENGINE = create_engine(
-    DATABASE,
-    encoding = "utf-8",
-    echo=True # True:実行のたびにSQLが出力
-)
-
-# Sessionの作成
-session = scoped_session(
-  # ORM実行時の設定
-    sessionmaker(
-        autocommit = False,
-        autoflush = False,
-        bind = ENGINE
-    )
-)
-
-# tables.pyで継承する
-Base = declarative_base()
-Base.query = session.query_property()
+distance = (station2.kilo - station1.kilo)
+print("{:.2f}".format(distance))
